@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { IKImage } from 'imagekitio-react';
+import Image from "./Image";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       <div className="flex items-center gap-4 text-2xl font-bold">
-        <IKImage urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT} /*path="/logo.png"*/ src="https://ik.imagekit.io/fandresena/logo.png?updatedAt=1734014824542" className="w-8 h-8" alt="" />
+        <Image src="logo.png" alt="Lama logo" w={32} h={32}/>
         <span>lamalog</span>
       </div>
       <div className="md:hidden">
