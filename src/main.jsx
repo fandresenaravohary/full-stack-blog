@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout.jsx";
 import Homepage from "./routes/Homepage.jsx";
 import PostListPage from "./routes/PostListPage.jsx";
 import Write from "./routes/Write.jsx";
@@ -15,12 +16,14 @@ createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/posts" element={<PostListPage />} />
-        <Route path="/:slug" element={<SinglePostPage />} />
-        <Route path="/write" element={<Write />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/" element={<MainLayout/>}>
+          <Route index element={<Homepage />} />
+          <Route path="posts" element={<PostListPage />} />
+          <Route path=":slug" element={<SinglePostPage />} />
+          <Route path="write" element={<Write />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>
