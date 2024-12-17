@@ -9,22 +9,31 @@ import Write from "./routes/Write.jsx";
 import LoginPage from "./routes/LoginPage.jsx";
 import RegisterPage from "./routes/RegisterPage.jsx";
 import SinglePostPage from "./routes/SinglePostPage.jsx";
+import { ClerkProvider } from "@clerk/clerk-react";
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
 
 const root = document.getElementById("root");
 
 createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout/>}>
-          <Route index element={<Homepage />} />
-          <Route path="posts" element={<PostListPage />} />
-          <Route path=":slug" element={<SinglePostPage />} />
-          <Route path="write" element={<Write />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Homepage />} />
+            <Route path="posts" element={<PostListPage />} />
+            <Route path=":slug" element={<SinglePostPage />} />
+            <Route path="write" element={<Write />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ClerkProvider>
   </StrictMode>
 );
